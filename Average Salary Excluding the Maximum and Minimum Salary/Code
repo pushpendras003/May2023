@@ -1,0 +1,13 @@
+class Solution:
+    def average(self, salary: List[int]) -> float:
+      top=0
+      bottom=float('inf')
+      s=0
+      n=len(salary)-2
+      for i in salary:
+        if i>top:
+          top=i
+        if i<bottom:
+          bottom=i
+        s+=i
+      return (s-top-bottom)/n
