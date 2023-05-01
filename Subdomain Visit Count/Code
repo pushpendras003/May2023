@@ -1,0 +1,20 @@
+class Solution:
+    def subdomainVisits(self, cpdomains: List[str]) -> List[str]:
+      d=defaultdict(int)
+
+      for i in cpdomains:
+        split_string=re.split(r'[. ]',i)
+        t=''
+        for j in range(len(split_string)-1,0,-1):
+          if t=='':
+            t+=split_string[j]
+          else:
+            t=split_string[j]+'.'+t
+          d[t]+=int(split_string[0])
+      l=[]
+      for i,j in d.items():
+        l.append(str(j)+" "+i)
+      return l
+
+
+      
