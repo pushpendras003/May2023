@@ -1,0 +1,17 @@
+class Solution:
+    def countNegatives(self, grid: List[List[int]]) -> int:
+      c=0
+      for i in range(len(grid)):
+        j=0
+        l=k=len(grid[0])-1
+        while j<=k:
+          m=(j+k)//2
+          if grid[i][m]>=0:
+            j=m+1
+          else:
+            k=m-1
+        #print(j)
+        c+=l-j+1 if j<=(l+1) else 0
+      return c
+        
+          
