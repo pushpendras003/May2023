@@ -1,0 +1,15 @@
+class Solution:
+    def longestContinuousSubstring(self, s: str) -> int:
+        
+        ans=0
+        c=0
+        for i in range(len(s)):
+          if i>0:
+            if ord(s[i-1])+1==ord(s[i]):
+              c+=1
+              ans=max(ans,c)
+            else:
+              c=0
+        return ans+1
+        
+          
