@@ -1,0 +1,32 @@
+class Fenwick: 
+    def __init__(self, n): 
+        self.data = [0]*(n+1)
+
+    def query(self, k): 
+        k += 1
+        ans = 0 
+        while k:
+            ans = max(ans, self.data[k])
+            k -= k & (-k)
+        return ans 
+            
+    def update(self, k, x): 
+        k += 1
+        while k < len(self.data): 
+            self.data[k] = max(self.data[k], x)
+            k += k & (-k)
+
+            
+class Solution:
+    def longestObstacleCourseAtEachPosition(self, obstacles: List[int]) -> List[int]:
+        # compress numbers into smaller range
+        ss = sorted(set(obstacles))
+        mp = dict(zip(ss, range(len(ss))))
+        
+        ans = []
+        fen = Fenwick(len(ss))
+        for x in obstacles: 
+            val = fen.query(mp[x])+1
+            ans.append(val)
+            fen.update(mp[x], val)
+        return ans 
