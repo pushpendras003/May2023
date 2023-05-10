@@ -1,0 +1,31 @@
+class Solution:
+    def generateMatrix(self, n: int) -> List[List[int]]:
+      v=n*n
+      i=1
+      rowbegin=0
+      colbegin=0
+      rowend=n-1
+      colend=n-1
+      mat=[[0 for _ in range(n)] for _ in range(n)]
+      while rowbegin<=rowend and colbegin<=colend:
+        
+        for j in range(colbegin,colend+1):
+          mat[rowbegin][j]=i
+          i+=1
+        rowbegin+=1
+        for j in range(rowbegin,rowend+1):
+          mat[j][colend]=i
+          i+=1
+        colend-=1
+        if rowbegin<=rowend:
+          for j in range(colend,colbegin-1,-1):
+            mat[rowend][j]=i
+            i+=1
+          rowend-=1
+        if colbegin<=colend:
+          for j in range(rowend,rowbegin-1,-1):
+            mat[j][colbegin]=i
+            i+=1
+          colbegin+=1   
+      return mat
+        
