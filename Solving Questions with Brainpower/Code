@@ -1,0 +1,8 @@
+class Solution:
+    def mostPoints(self, q: List[List[int]]) -> int:
+      @cache
+      def helper(i):
+        if i>=len(q):
+          return 0
+        return max(q[i][0]+helper(i+q[i][1]+1),helper(i+1))
+      return helper(0)
