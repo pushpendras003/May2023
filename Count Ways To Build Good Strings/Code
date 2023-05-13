@@ -1,0 +1,20 @@
+class Solution:
+    def countGoodStrings(self, low: int, high: int, zero: int, one: int) -> int:
+        ans=[0]*200005
+        m=1000000007
+        ans[0]=1
+        for i in range(100005):
+            ans[i+zero]%=m
+            ans[i+zero]+=ans[i]
+            ans[i+one]%=m
+            ans[i+one]+=ans[i]
+        t=0
+        for i in range(low,high+1):
+            t=(t+ans[i])%m
+            
+        return t
+            
+            
+            
+            
+        
