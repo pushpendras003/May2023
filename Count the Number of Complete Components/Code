@@ -1,0 +1,31 @@
+class Solution:
+    def countCompleteComponents(self, n: int, edges: List[List[int]]) -> int:
+        adj = [[] for _ in range(n)]
+        for u, v in edges:
+            adj[u].append(v)
+            adj[v].append(u)
+        
+        def dfs(node, visited, conn):
+            visited.add(node)
+            conn.add(node)
+            for neighbor in adj[node]:
+                if neighbor not in visited:
+                    dfs(neighbor, visited, conn)
+
+        visited = set()
+        conn_comp = 0
+        for i in range(n):
+            if i not in visited:
+                conn = set()
+                dfs(i, visited, conn)
+                is_complete = True
+                for u in conn:
+                    for v in conn:
+                        if u != v and v not in adj[u]:
+                            is_complete = False
+                            break
+                    if not is_complete:
+                        break
+                conn_comp += 1 if is_complete else 0
+        
+        return conn_comp
