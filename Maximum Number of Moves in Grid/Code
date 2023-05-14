@@ -1,0 +1,26 @@
+class Solution:
+    
+    def maxMoves(self, grid: List[List[int]]) -> int:
+        m, n = len(grid), len(grid[0])
+        directions = [(1, 1), (0, 1), (-1, 1)]
+        visited = set()
+        @cache
+        def dfs(r, c):
+            if c == n - 1:
+                return 1
+            visited.add((r, c))
+            max_moves = 0
+            for dr, dc in directions:
+                nr, nc = r + dr, c + dc
+                if 0 <= nr < m and 0 <= nc < n and (nr, nc) not in visited and grid[nr][nc] > grid[r][c]:
+                    max_moves = max(max_moves, dfs(nr, nc))
+            visited.remove((r, c))
+            return max_moves + 1
+
+        max_moves = 0
+        for i in range(m):
+            max_moves = max(max_moves, dfs(i, 0))
+        return max_moves - 1 if max_moves>0 else 0
+
+        
+        
