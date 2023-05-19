@@ -1,0 +1,18 @@
+class Solution:
+    def isBipartite(self, graph: List[List[int]]) -> bool:
+      n=len(graph)
+      colors=[0]*n
+
+      for i in range(n):
+        if colors[i]!=0:continue
+        q=[i]
+        colors[i]=1
+        while q:
+          cur=q.pop(0)
+          for j in graph[cur]:
+            if colors[j]==0:
+              colors[j]=-colors[cur]
+              q.append(j)
+            elif colors[j]!=-colors[cur]:
+              return False
+      return True
