@@ -1,0 +1,32 @@
+class Solution:
+    def calcEquation(self, eq: List[List[str]], values: List[float], qu: List[List[str]]) -> List[float]:
+
+      d=defaultdict(list)
+      for i in range(len(eq)):
+        a,b=eq[i]
+        d[a].append((values[i],b))
+        d[b].append((1/values[i],a))
+
+      def dfs(i,j,d,visited):
+        if i not in d:
+          return -1.0
+        if i==j:return 1
+        visited.add(i)
+        visited.add(i)
+        for key,value in d[i]:
+          if value==j:
+            return key
+          if value not in visited:
+            curr=dfs(value,j,d,visited)
+            if curr!=-1:
+              return key*curr
+        return -1.0
+        
+      res=[]
+      print(d)
+      for i,j in qu:
+        t=dfs(i,j,d,set())
+        res.append(t)
+      return res
+          
+
