@@ -1,0 +1,12 @@
+class Solution:
+    def minLength(self, s: str) -> int:
+        
+        
+        l=[]
+        c=("AB","CD")
+        for i in s:
+          if l and l[-1]+i in c:
+            l.pop()
+          else:
+            l.append(i)
+        return len(l)
