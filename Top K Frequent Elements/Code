@@ -1,0 +1,23 @@
+class Solution:
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+        d=defaultdict(int)
+        n=len(nums)
+        maxx=0
+        for i in nums:
+            d[i]+=1
+            maxx=max(maxx,d[i])
+        l=[[] for _ in range(n+1)]
+        for i,j in d.items():
+          l[j].append(i)
+        c=0
+        ans=[]
+        for i in range(n,-1,-1):
+          while len(l[i])>0:
+            ans.append(l[i].pop())
+            c+=1
+            if c==k:
+              break
+          if c==k:
+            break
+            
+        return ans 
