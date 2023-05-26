@@ -1,0 +1,20 @@
+class Solution:
+    def stoneGameII(self, piles: List[int]) -> int:
+      @cache
+      def helper(t,i,m):
+        if i>=len(piles):return 0
+        
+        if t==1:
+          s=0
+          ans=0
+          for j in range(1,2*m+1):
+            if j+i-1>=len(piles):break
+            s+=piles[i+j-1]
+            ans=max(ans,s+helper(0,i+j,max(j,m)))
+        else:
+          ans=10**9
+          for j in range(1,2*m+1):
+            if i+j-1>=len(piles):break
+            ans=min(ans,helper(1,i+j,max(j,m)))
+        return ans 
+      return helper(1,0,1)
