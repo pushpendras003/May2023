@@ -1,0 +1,25 @@
+class Solution:
+    def stoneGameIII(self, piles: List[int]) -> str:
+
+      def helper(i,t,piles,dp):
+        
+        if i>=len(piles):return 0
+        if dp[i][t]!=float('inf'):return dp[i][t]
+        ans=-1*float('inf') if t==1 else float('inf')
+        s=0
+        for j in range(i,min(i+3,len(piles))):
+          if t==1:
+            s+=piles[j]
+            ans=max(ans,s+helper(j+1,0,piles,dp))
+          else:
+            s-=piles[j]
+            ans=min(ans,s+helper(j+1,1,piles,dp))
+        dp[i][t]=ans
+        return dp[i][t]
+      dp=[[float('inf')]*2 for _ in range(len(piles))]
+      ans=helper(0,1,piles,dp)
+      if ans>0:
+        return "Alice"
+      elif ans<0:
+        return "Bob"
+      return "Tie"
