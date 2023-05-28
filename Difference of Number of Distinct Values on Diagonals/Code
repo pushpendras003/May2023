@@ -1,0 +1,30 @@
+class Solution:
+    def differenceOfDistinctValues(self, grid: List[List[int]]) -> List[List[int]]:
+      
+      m, n = len(grid), len(grid[0])
+      answer = [[0] * n for _ in range(m)]
+
+      for r in range(m):
+          for c in range(n):
+              topLeft = set()
+              bottomRight = set()
+
+              j=c-1
+              for i in reversed(range(r)):
+                    if j==-1:
+                      break
+                    topLeft.add(grid[i][j])
+                    j-=1
+
+              j=c+1
+              for i in range(r+1, m):
+                  if j==n:
+                    break
+                  bottomRight.add(grid[i][j])
+                  j+=1
+
+              answer[r][c] = abs(len(topLeft) - len(bottomRight))
+
+      return answer
+    
+      
