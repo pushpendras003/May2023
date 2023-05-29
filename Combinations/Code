@@ -1,0 +1,20 @@
+class Solution:
+    def combine(self, n: int, k: int) -> List[List[int]]:
+      
+      def helper(indx,n,k,l,visited):
+        if tuple(l) in visited:return 
+        visited.add(tuple(l))
+        if indx>n+1:
+          return 0
+        if len(l)==k:
+          self.ans.add(tuple(l.copy()))
+          
+        for i in range(indx,n+1):
+          l.append(i)
+          helper(i+1,n,k,l,visited)
+          l.pop()
+          helper(i+1,n,k,l,visited)
+      self.ans=set()
+      l=[]
+      helper(1,n,k,l,set())
+      return self.ans
