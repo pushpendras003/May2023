@@ -1,0 +1,25 @@
+class Solution:
+    def shortestPathBinaryMatrix(self, grid: List[List[int]]) -> int:
+      n=len(grid)
+      if grid[0][0]!=0 or grid[n-1][n-1]!=0:
+        return -1
+      l=[(1,1),(0,1),(1,0),(-1,0),(-1,-1),(-1,1),(1,-1),(0,-1)]
+
+      q=[(0,0,1)]
+      grid[0][0]=0
+      while q:
+        i,j,c=q.pop(0)
+        if i==n-1 and j==n-1:return c
+
+        for a,b in l:
+          if 0<=i+a<n and 0<=j+b<n and grid[i+a][j+b]==0:
+            grid[i+a][j+b]=1
+            q.append((i+a,j+b,c+1))
+      return -1
+
+
+
+
+      
+        
+            
